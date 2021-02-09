@@ -83,14 +83,14 @@ public class TaskDao {
     }
 
     public List<DownloadTask> loadTasksWithRawQuery(String query) {
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
-        Cursor cursor = db.rawQuery(query, null);
+        // SQLiteDatabase db = dbHelper.getReadableDatabase();
+//        Cursor cursor = db.rawQuery("query", null);
 
         List<DownloadTask> result = new ArrayList<>();
-        while (cursor.moveToNext()) {
-            result.add(parseCursor(cursor));
-        }
-        cursor.close();
+//        while (cursor.moveToNext()) {
+//            result.add(parseCursor(cursor));
+//        }
+//        cursor.close();
 
         return result;
     }
