@@ -53,31 +53,14 @@ public class TaskDbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        SQLiteStatement stmnt = db.compileStatement("CREATE TABLE ? (? INTEGER PRIMARY KEY,? VARCHAR(256), ? TEXT, ? INTEGER DEFAULT 0, " +
-                "? INTEGER DEFAULT 0, ? TEXT, ? TEXT, ? TEXT, ? VARCHAR(128), ? TINYINT DEFAULT 0, ? TINYINT DEFAULT 0, ? TINYINT DEFAULT 0, ? INTEGER DEFAULT 0"
-                + ")");
-        stmnt.bindString(1,TaskEntry.TABLE_NAME);
-        stmnt.bindString(2,TaskEntry._ID);
-        stmnt.bindString(3,TaskEntry.COLUMN_NAME_TASK_ID);
-        stmnt.bindString(4, TaskEntry.COLUMN_NAME_URL);
-        stmnt.bindString(5,TaskEntry.COLUMN_NAME_STATUS);
-        stmnt.bindString(6,TaskEntry.COLUMN_NAME_PROGRESS);
-        stmnt.bindString(7,TaskEntry.COLUMN_NAME_FILE_NAME);
-        stmnt.bindString(8,TaskEntry.COLUMN_NAME_SAVED_DIR);
-        stmnt.bindString(9,TaskEntry.COLUMN_NAME_HEADERS);
-        stmnt.bindString(10,TaskEntry.COLUMN_NAME_MIME_TYPE);
-        stmnt.bindString(11,TaskEntry.COLUMN_NAME_RESUMABLE);
-        stmnt.bindString(12,TaskEntry.COLUMN_NAME_SHOW_NOTIFICATION);
-        stmnt.bindString(13,TaskEntry.COLUMN_NAME_OPEN_FILE_FROM_NOTIFICATION);
-        stmnt.bindString(14,TaskEntry.COLUMN_NAME_TIME_CREATED);
+        SQLiteStatement stmnt = db.compileStatement(SQL_CREATE_ENTRIES);
         stmnt.execute();
 //        db.execSQL(SQL_CREATE_ENTRIES);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        SQLiteStatement cmd = db.compileStatement("DROP TABLE IF EXISTS ?");
-        cmd.bindString(1, TaskEntry.TABLE_NAME);
+        SQLiteStatement cmd = db.compileStatement(SQL_DELETE_ENTRIES);
         cmd.execute();
 //        db.execSQL(SQL_DELETE_ENTRIES);
         onCreate(db);
